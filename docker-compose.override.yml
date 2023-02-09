@@ -24,6 +24,8 @@ services:
     build:
       context: .
     command: python run_polling.py
+    volumes:
+      - .:/home/django/
     depends_on:
       django:
           condition: service_healthy

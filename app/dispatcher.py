@@ -1,6 +1,8 @@
 """
     Telegram event handlers
 """
+from queue import Queue
+
 from telegram.ext import (
     Dispatcher, Filters,
     CommandHandler, MessageHandler,
@@ -70,5 +72,5 @@ def setup_dispatcher(dp):
     return dp
 
 
-n_workers = 0 if DEBUG else 4
-dispatcher = setup_dispatcher(Dispatcher(bot, update_queue=None, workers=n_workers, use_context=True))
+n_workers = 1 if DEBUG else 4
+dispatcher = setup_dispatcher(Dispatcher(bot, update_queue=Queue(100), workers=n_workers))
