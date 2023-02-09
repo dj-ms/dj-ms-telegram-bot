@@ -9,7 +9,7 @@ import telegram
 
 from core.celery import app
 from celery.utils.log import get_task_logger
-from app.handlers.broadcast_message.utils import send_one_message, from_celery_entities_to_entities, \
+from app.bot.handlers.broadcast_message.utils import send_one_message, from_celery_entities_to_entities, \
     from_celery_markup_to_markup
 
 logger = get_task_logger(__name__)

@@ -4,9 +4,9 @@ from django.utils.timezone import now
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
 
-from app.handlers.admin import static_text
-from app.handlers.admin.utils import _get_csv_from_qs_values
-from app.handlers.utils.info import send_typing_action
+from app.bot.handlers.admin import static_text
+from app.bot.handlers.admin.utils import _get_csv_from_qs_values
+from app.bot.handlers.utils.info import send_typing_action
 from app.models import User
 
 

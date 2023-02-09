@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-from app.handlers.broadcast_message.manage_data import CONFIRM_DECLINE_BROADCAST, CONFIRM_BROADCAST, DECLINE_BROADCAST
-from app.handlers.broadcast_message.static_text import confirm_broadcast, decline_broadcast
+from app.bot.handlers.broadcast_message.manage_data import CONFIRM_DECLINE_BROADCAST, CONFIRM_BROADCAST, DECLINE_BROADCAST
+from app.bot.handlers.broadcast_message.static_text import confirm_broadcast, decline_broadcast
 
 
 def keyboard_confirm_decline_broadcasting() -> InlineKeyboardMarkup:

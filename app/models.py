@@ -8,7 +8,7 @@ from django.db.models import QuerySet, Manager
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from app.handlers.utils.info import extract_user_data_from_update
+from app.bot.handlers.utils.info import extract_user_data_from_update
 
 
 nb = dict(null=True, blank=True)

@@ -4,7 +4,7 @@ from typing import Dict, Callable
 import telegram
 from telegram import Update
 
-from app.main import bot
+from app.bot.main import bot
 
 
 def send_typing_action(func: Callable):

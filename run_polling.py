@@ -7,7 +7,7 @@ from telegram import Bot
 from telegram.ext import Updater
 
 from core.settings import TELEGRAM_TOKEN
-from app.dispatcher import setup_dispatcher
+from app.bot.dispatcher import setup_dispatcher
 
 
 def run_polling(tg_token: str = TELEGRAM_TOKEN):

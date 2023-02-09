@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-from app.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
-from app.handlers.onboarding.static_text import github_button_text, secret_level_button_text
+from app.bot.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
+from app.bot.handlers.onboarding.static_text import github_button_text, secret_level_button_text
 
 
 def make_keyboard_for_start_command() -> InlineKeyboardMarkup:

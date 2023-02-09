@@ -1,6 +1,6 @@
 from telegram import ReplyKeyboardMarkup, KeyboardButton
 
-from app.handlers.location.static_text import SEND_LOCATION
+from app.bot.handlers.location.static_text import SEND_LOCATION
 
 
 def send_location_keyboard() -> ReplyKeyboardMarkup:

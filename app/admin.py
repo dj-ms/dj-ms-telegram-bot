@@ -9,7 +9,7 @@ from app.models import User
 from app.forms import BroadcastForm
 
 from app.tasks import broadcast_message
-from app.handlers.broadcast_message.utils import send_one_message
+from app.bot.handlers.broadcast_message.utils import send_one_message
 
 
 @admin.register(User)

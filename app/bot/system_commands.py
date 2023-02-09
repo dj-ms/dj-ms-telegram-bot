@@ -2,7 +2,7 @@ from typing import Dict
 
 from telegram import Bot, BotCommand
 
-from app.main import bot
+from app.bot.main import bot
 
 
 def set_up_commands(bot_instance: Bot) -> None:

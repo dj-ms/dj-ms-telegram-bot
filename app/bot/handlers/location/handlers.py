@@ -2,8 +2,8 @@ import telegram
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from app.handlers.location.static_text import share_location, thanks_for_location
-from app.handlers.location.keyboards import send_location_keyboard
+from app.bot.handlers.location.static_text import share_location, thanks_for_location
+from app.bot.handlers.location.keyboards import send_location_keyboard
 from app.models import User, Location
 
 

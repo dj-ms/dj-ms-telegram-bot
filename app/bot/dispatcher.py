@@ -10,16 +10,16 @@ from telegram.ext import (
 )
 
 from core.settings import DEBUG
-from app.handlers.broadcast_message.manage_data import CONFIRM_DECLINE_BROADCAST
-from app.handlers.broadcast_message.static_text import broadcast_command
-from app.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
+from app.bot.handlers.broadcast_message.manage_data import CONFIRM_DECLINE_BROADCAST
+from app.bot.handlers.broadcast_message.static_text import broadcast_command
+from app.bot.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
 
-from app.handlers.utils import files, error
-from app.handlers.admin import handlers as admin_handlers
-from app.handlers.location import handlers as location_handlers
-from app.handlers.onboarding import handlers as onboarding_handlers
-from app.handlers.broadcast_message import handlers as broadcast_handlers
-from app.main import bot
+from app.bot.handlers.utils import files, error
+from app.bot.handlers.admin import handlers as admin_handlers
+from app.bot.handlers.location import handlers as location_handlers
+from app.bot.handlers.onboarding import handlers as onboarding_handlers
+from app.bot.handlers.broadcast_message import handlers as broadcast_handlers
+from app.bot.main import bot
 
 
 def setup_dispatcher(dp):

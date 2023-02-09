@@ -6,8 +6,8 @@ from telegram import Update
 
 from core.celery import app
 from core.settings import DEBUG
-from app.dispatcher import dispatcher
-from app.main import bot
+from app.bot.dispatcher import dispatcher
+from app.bot.main import bot
 
 logger = logging.getLogger(__name__)
 
