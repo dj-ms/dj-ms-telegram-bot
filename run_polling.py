@@ -14,8 +14,7 @@ def run_polling(tg_token: str = TELEGRAM_TOKEN):
     """ Run bot in polling mode """
     updater = Updater(tg_token, use_context=True)
 
-    dp = updater.dispatcher
-    dp = setup_dispatcher(dp)
+    setup_dispatcher(updater.dispatcher)
 
     bot_info = Bot(tg_token).get_me()
     bot_link = f"https://t.me/{bot_info['username']}"
