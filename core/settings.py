@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import logging
 import os
+import sys
 from pathlib import Path
 
 import dj_database_url
@@ -274,3 +276,15 @@ if SENTRY_DSN := os.getenv('SENTRY_DSN', None):
 
         environment=environment
     )
+
+
+# -----> TELEGRAM
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+if TELEGRAM_TOKEN is None:
+    logging.error(
+        "Please provide TELEGRAM_TOKEN in .env file.\n"
+        "Example of .env file: https://github.com/ohld/django-telegram-bot/blob/main/.env_example"
+    )
+    sys.exit(1)
+
+TELEGRAM_LOGS_CHAT_ID = os.getenv("TELEGRAM_LOGS_CHAT_ID", default=None)
