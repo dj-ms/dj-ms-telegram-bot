@@ -8,6 +8,12 @@ from app.bot.decorators import bot_command, send_typing_action, bot_menu
 from core.settings import LANGUAGES, LANGUAGE_CODE
 
 
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
 class Worker(BaseBotWorker):
 
     @bot_command(name='start', description=_('🚀 Restart'))
@@ -63,9 +69,10 @@ class Worker(BaseBotWorker):
             self.update.message.reply_text(text=_('Language changed to %s') % language_code,
                                            reply_to_message_id=self.update.message.message_id)
             return self.start()
+        languages = list(str(lang[1]) for lang in LANGUAGES)
         kb = [
             [_('🔙 Back')],
-            list(str(lang[1]) for lang in LANGUAGES)
+            *list(chunks(languages, 3))
         ]
         reply_markup = self.get_keyboard_markup(kb)
         self.update.message.reply_text(text=_('Language'),
