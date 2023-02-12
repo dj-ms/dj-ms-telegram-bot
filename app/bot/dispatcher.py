@@ -30,6 +30,8 @@ def setup_dispatcher(dp):
     #     <function_handler>,
     # ))
 
+    Worker.setup_commands(bot)
+
     return dp
 
 

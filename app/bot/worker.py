@@ -8,7 +8,7 @@ class Worker(BaseBotWorker):
         super().__init__(*args, **kwargs)
         self.user, self.user_created = User.get_user_and_created(self.update, self.context)
 
-    @bot_command(name='start')
+    @bot_command(name='start', description='🚀 Restart')
     def start(self) -> None:
 
         if self.user_created:

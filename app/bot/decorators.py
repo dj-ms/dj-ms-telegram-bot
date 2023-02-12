@@ -15,11 +15,12 @@ class CommandMapper(dict):
         return func
 
 
-def bot_command(name: str, **kwargs):
+def bot_command(name: str, description: str, **kwargs):
 
     def decorator(func):
         func.mapping = CommandMapper(func, name)
         func.name = name
+        func.description = description
         func.kwargs = kwargs
         return func
 
