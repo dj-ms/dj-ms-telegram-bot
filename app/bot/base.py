@@ -46,7 +46,7 @@ class BaseBotWorker:
 
         def command():
             self = cls(update, context)
-            command_name = self.update.message.text.split()[0].replace('/', '')
+            command_name = self.update.message.text.split('@')[0].replace('/', '')
             return getattr(self, command_name)()
 
         return command()
