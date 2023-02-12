@@ -1,21 +1,13 @@
 import json
 import logging
-from django.views import View
-from django.http import JsonResponse
-from telegram import Update
 
-from core.celery import app
+from django.http import JsonResponse
+from django.views import View
+
+from app.tasks import process_telegram_event
 from core.settings import DEBUG
-from app.bot.base import bot
 
 logger = logging.getLogger(__name__)
-
-
-@app.task(ignore_result=True)
-def process_telegram_event(update_json):
-    update = Update.de_json(update_json, bot)
-    from app.bot.dispatcher import dispatcher
-    dispatcher.process_update(update)
 
 
 class TelegramBotWebhookView(View):

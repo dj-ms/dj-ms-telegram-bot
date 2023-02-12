@@ -16,7 +16,7 @@ def setup_dispatcher(dp):
     Adding handlers for events from Telegram
     """
 
-    Worker.setup_commands(dp, bot)
+    Worker.setup_commands(dp, dp.bot)
 
     # EXAMPLES FOR HANDLERS
     # dp.add_handler(MessageHandler(Filters.text, <function_handler>))
