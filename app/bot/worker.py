@@ -1,3 +1,5 @@
+import re
+
 from django.utils import translation
 from django.utils.translation import gettext as _
 
@@ -29,13 +31,18 @@ class Worker(BaseBotWorker):
                                        reply_to_message_id=self.update.message.message_id,
                                        reply_markup=reply_markup)
 
+    @bot_menu(name='home', description=_('🏠 Home'))
+    @send_typing_action
+    def home(self, *args) -> None:
+        return self.start()
+
     @bot_menu(name='settings', description=_('⚙️ Settings'))
     @bot_command(name='settings', description=_('⚙️ Settings'))
     @send_typing_action
     def settings(self, *args) -> None:
         kb = [
-            [_('🔙 Back')],
-            [_('🌐 Language')],
+            [_('🔙 Back'), _('🏠 Home')],
+            [_('🌐 Language'), _('👤 Change name')],
         ]
         reply_markup = self.get_keyboard_markup(kb)
         self.update.message.reply_text(text=_('Settings'),
@@ -52,7 +59,6 @@ class Worker(BaseBotWorker):
             language_code = next(lang[0] for lang in LANGUAGES if lang[1] == language_code)
             self.user.language_code = language_code
             self.user.save()
-            print(self.user.language_code)
             translation.activate(language_code)
             self.update.message.reply_text(text=_('Language changed to %s') % language_code,
                                            reply_to_message_id=self.update.message.message_id)
@@ -63,5 +69,31 @@ class Worker(BaseBotWorker):
         ]
         reply_markup = self.get_keyboard_markup(kb)
         self.update.message.reply_text(text=_('Language'),
+                                       reply_to_message_id=self.update.message.message_id,
+                                       reply_markup=reply_markup)
+
+    @bot_menu(name='change_name', description=_('👤 Change name'))
+    @send_typing_action
+    def change_name(self, new_name_str: str = None) -> None:
+        if new_name_str is not None:
+            if match := re.search(r'(?P<first>[\w|-]{1,64})( (?P<middle>[\w|-]{1,64})( (?P<last>[\w|-]{1,64}))?)?',
+                                  new_name_str):
+                first_name = match.group('first')
+                if match.group('middle') and match.group('last'):
+                    first_name += ' ' + match.group('middle')
+                    last_name = match.group('last')
+                else:
+                    last_name = match.group('middle')
+                self.user.first_name = first_name
+                self.user.last_name = last_name
+                self.user.save()
+                self.update.message.reply_text(text=_('Name changed to %s') % new_name_str,
+                                               reply_to_message_id=self.update.message.message_id)
+                return self.start()
+        kb = [
+            [_('🔙 Back')],
+        ]
+        reply_markup = self.get_keyboard_markup(kb)
+        self.update.message.reply_text(text=_('Change name'),
                                        reply_to_message_id=self.update.message.message_id,
                                        reply_markup=reply_markup)

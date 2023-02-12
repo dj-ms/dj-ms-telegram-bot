@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from typing import Union, Optional, Tuple
 
 from django.db.models import QuerySet, Manager
+from django.utils import translation
 from telegram import Update
 from telegram.ext import CallbackContext
 
@@ -67,6 +68,8 @@ class User(CreateUpdateTracker):
         """ python-telegram-bot's Update, Context --> User instance """
         data = extract_user_data_from_update(update)
         language_code = data.pop('language_code', None)
+        first_name = data.pop('first_name', None)
+        last_name = data.pop('last_name', None)
         u, created = cls.objects.update_or_create(user_id=data["user_id"], defaults=data)
         if created:
             # Save deep_link to User model
@@ -75,11 +78,16 @@ class User(CreateUpdateTracker):
                 if str(payload).strip() != str(data["user_id"]).strip():  # you can't invite yourself
                     u.deep_link = payload
                     u.save()
+            u.first_name = first_name
+            u.last_name = last_name
+            u.language_code = language_code
+            u.save()
         allowed_langs = list(i[0] for i in LANGUAGES)
         if u.language_code not in allowed_langs:
             language_code = language_code if language_code in allowed_langs else LANGUAGE_CODE
             u.language_code = language_code
             u.save()
+        translation.activate(u.language_code)
         return u, created
 
     @classmethod

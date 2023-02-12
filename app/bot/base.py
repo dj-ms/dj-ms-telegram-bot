@@ -4,14 +4,13 @@ from inspect import getmembers
 from typing import Iterable
 
 import telegram
-from django.utils import translation
 from django.utils.translation import gettext as _
 from telegram import Update, BotCommand, Bot
 from telegram.ext import CallbackContext, CommandHandler
 
 from app.bot.decorators import CommandMapper, MenuMapper, bot_menu, send_typing_action
 from app.models import User
-from core.settings import LANGUAGES, LANGUAGE_CODE, TELEGRAM_TOKEN
+from core.settings import LANGUAGES, TELEGRAM_TOKEN
 
 bot = Bot(TELEGRAM_TOKEN)
 TELEGRAM_BOT_USERNAME = bot.get_me()["username"]
@@ -53,7 +52,6 @@ class BaseBotWorker:
         self.update = update
         self.context = context
         self.user, self.user_created = User.get_user_and_created(self.update, self.context)
-        self.__set_language()
 
     @classmethod
     def handle_command(cls, update, context):
@@ -72,19 +70,13 @@ class BaseBotWorker:
         def menu():
             self = cls(update, context)
             input_text = self.update.message.text
-            key_names = self.context.user_data.get('keyboard', [])
             avail_menus = getmembers(cls, _is_menu)
-
-            assert input_text in key_names, (
-                'Expected input_text (`{input_text}`) to match key_names (`{key_names}`).').format(
-                input_text=input_text, key_names=key_names)
             if input_text in list(_(func.description) for name, func in avail_menus):
                 next_path = next(name for name, func in avail_menus if _(func.description) == input_text)
                 args = ()
             else:
                 next_path = self.context.user_data.get('path', 'start')
                 args = (input_text, )
-
             self.__update_paths(next_path)
             return getattr(self, next_path)(*args)
 
@@ -92,12 +84,6 @@ class BaseBotWorker:
             return menu()
         except AssertionError as e:
             logging.error(e)
-
-    def __set_language(self):
-        language_code = self.user.language_code
-        if language_code is None or language_code not in list(lang[0] for lang in LANGUAGES):
-            language_code = LANGUAGE_CODE
-        translation.activate(language_code)
 
     def __update_paths(self, next_path):
         current_path = self.context.user_data.get('path', 'start')
@@ -134,7 +120,7 @@ class BaseBotWorker:
             bot_instance.set_my_commands(
                 language_code=language_code,
                 commands=[
-                    BotCommand(command.name, command.description) for command in commands
+                    BotCommand(command.name, _(command.description)) for command in commands
                 ]
             )
 
