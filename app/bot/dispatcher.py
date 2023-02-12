@@ -4,7 +4,7 @@
 from queue import Queue
 
 from telegram.ext import (
-    Dispatcher, CommandHandler, )
+    Dispatcher, )
 
 from app.bot.main import bot
 from app.bot.worker import Worker
@@ -16,7 +16,7 @@ def setup_dispatcher(dp):
     Adding handlers for events from Telegram
     """
 
-    dp.add_handler(CommandHandler('start', Worker.handle_command))
+    Worker.setup_commands(dp, bot)
 
     # EXAMPLES FOR HANDLERS
     # dp.add_handler(MessageHandler(Filters.text, <function_handler>))
@@ -29,8 +29,6 @@ def setup_dispatcher(dp):
     #     # & Filters.forwarded & (Filters.photo | Filters.video | Filters.animation),
     #     <function_handler>,
     # ))
-
-    Worker.setup_commands(bot)
 
     return dp
 

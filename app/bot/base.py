@@ -1,7 +1,7 @@
 from inspect import getmembers
 
 from telegram import Update, BotCommand
-from telegram.ext import CallbackContext
+from telegram.ext import CallbackContext, CommandHandler
 
 from app.bot.decorators import CommandMapper
 from core.settings import LANGUAGES
@@ -40,13 +40,17 @@ class BaseBotWorker:
         return [_check_attr_name(method, name) for name, method in getmembers(cls, _is_command)]
 
     @classmethod
-    def setup_commands(cls, bot):
+    def setup_commands(cls, dispatcher, bot):
+        commands = cls.get_commands()
+        for command in commands:
+            dispatcher.add_handler(CommandHandler(command.name, cls.handle_command))
+
         bot.delete_my_commands()
         language_codes = list(lang[0] for lang in LANGUAGES)
         for language_code in language_codes:
             bot.set_my_commands(
                 language_code=language_code,
                 commands=[
-                    BotCommand(command.name, command.description) for command in cls.get_commands()
+                    BotCommand(command.name, command.description) for command in commands
                 ]
             )
