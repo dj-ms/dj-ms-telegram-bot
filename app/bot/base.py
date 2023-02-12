@@ -1,11 +1,24 @@
+import logging
+import sys
 from inspect import getmembers
 
+import telegram
 from django.utils import translation
-from telegram import Update, BotCommand
+from telegram import Update, BotCommand, Bot
 from telegram.ext import CallbackContext, CommandHandler
 
 from app.bot.decorators import CommandMapper
-from core.settings import LANGUAGES, LANGUAGE_CODE
+from app.models import User
+from core.settings import LANGUAGES, LANGUAGE_CODE, TELEGRAM_TOKEN
+
+bot = Bot(TELEGRAM_TOKEN)
+TELEGRAM_BOT_USERNAME = bot.get_me()["username"]
+# Global variable - the best way I found to init Telegram bot
+try:
+    pass
+except telegram.error.Unauthorized:
+    logging.error("Invalid TELEGRAM_TOKEN.")
+    sys.exit(1)
 
 
 def _is_command(attr):
@@ -25,6 +38,7 @@ class BaseBotWorker:
     def __init__(self, update: Update, context: CallbackContext):
         self.update = update
         self.context = context
+        self.user, self.user_created = User.get_user_and_created(self.update, self.context)
         self.set_language()
 
     @classmethod
@@ -39,7 +53,7 @@ class BaseBotWorker:
 
     def set_language(self):
         language_code = self.update.effective_user.language_code
-        if language_code is None or language_code not in dict(LANGUAGES.keys()):
+        if language_code is None or language_code not in list(lang[0] for lang in LANGUAGES):
             language_code = LANGUAGE_CODE
         translation.activate(language_code)
 

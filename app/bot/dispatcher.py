@@ -6,7 +6,7 @@ from queue import Queue
 from telegram.ext import (
     Dispatcher, )
 
-from app.bot.main import bot
+from app.bot.base import bot
 from app.bot.worker import Worker
 from core.settings import DEBUG
 

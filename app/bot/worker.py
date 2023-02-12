@@ -2,13 +2,9 @@ from django.utils.translation import gettext as _
 
 from app.bot.base import BaseBotWorker
 from app.bot.decorators import bot_command, send_typing_action
-from app.models import User
 
 
 class Worker(BaseBotWorker):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.user, self.user_created = User.get_user_and_created(self.update, self.context)
 
     @bot_command(name='start', description=_('🚀 Restart'))
     @send_typing_action
