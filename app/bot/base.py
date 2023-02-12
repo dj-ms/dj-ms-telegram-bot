@@ -52,7 +52,7 @@ class BaseBotWorker:
         return command()
 
     def set_language(self):
-        language_code = self.update.effective_user.language_code
+        language_code = self.user.language_code
         if language_code is None or language_code not in list(lang[0] for lang in LANGUAGES):
             language_code = LANGUAGE_CODE
         translation.activate(language_code)

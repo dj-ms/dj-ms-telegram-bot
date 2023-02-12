@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from app.models import Location
 from app.models import User
 
 
@@ -14,7 +13,3 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ["is_blocked_bot", ]
     search_fields = ('username', 'user_id')
 
-
-@admin.register(Location)
-class LocationAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user_id', 'created_at']
