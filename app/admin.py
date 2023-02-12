@@ -1,12 +1,7 @@
 from django.contrib import admin
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
-from core.settings import DEBUG
 
 from app.models import Location
 from app.models import User
-from app.forms import BroadcastForm
 
 
 @admin.register(User)
