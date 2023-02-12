@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-12 12:51+0000\n"
+"POT-Creation-Date: 2023-02-12 17:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,49 +22,67 @@ msgstr ""
 msgid "Telegram bot"
 msgstr "Telegram bot"
 
-#: app/bot/base.py:145 app/bot/worker.py:37 app/bot/worker.py:59
+#: app/bot/base.py:127 app/bot/worker.py:44 app/bot/worker.py:67
+#: app/bot/worker.py:94
 msgid "🔙 Back"
 msgstr "🔙 Orqaga"
 
-#: app/bot/worker.py:11
+#: app/bot/worker.py:13
 msgid "🚀 Restart"
 msgstr "🚀 Qayta ishga tushirish"
 
-#: app/bot/worker.py:18
+#: app/bot/worker.py:20
 #, python-format
 msgid "Welcome, %s!"
 msgstr "Hush kelibsiz, %s!"
 
-#: app/bot/worker.py:20
+#: app/bot/worker.py:22
 #, python-format
 msgid "Welcome back, %s!"
 msgstr "Assalomu alaykum, %s!"
 
-#: app/bot/worker.py:22 app/bot/worker.py:32 app/bot/worker.py:33
+#: app/bot/worker.py:24 app/bot/worker.py:39 app/bot/worker.py:40
 msgid "⚙️ Settings"
 msgstr "⚙️ Sozlamalar"
 
-#: app/bot/worker.py:26
+#: app/bot/worker.py:28
 #, python-format
 msgid "Hi there! I am %s."
 msgstr "Hammage salom! Men %sman."
 
-#: app/bot/worker.py:40
-msgid "Settings"
-msgstr ""
+#: app/bot/worker.py:34 app/bot/worker.py:44
+msgid "🏠 Home"
+msgstr "🏠 Bosh sahifa"
 
-#: app/bot/worker.py:44 app/bot/worker.py:45
+#: app/bot/worker.py:45 app/bot/worker.py:52 app/bot/worker.py:53
 msgid "🌐 Language"
 msgstr "🌐 Til"
 
-#: app/bot/worker.py:55
+#: app/bot/worker.py:45 app/bot/worker.py:75
+msgid "👤 Change name"
+msgstr "👤 Ismni o'zgartirish"
+
+#: app/bot/worker.py:48
+msgid "Settings"
+msgstr "Sozlamalar"
+
+#: app/bot/worker.py:63
 #, python-format
 msgid "Language changed to %s"
 msgstr "Til %s ga o'zgartirildi"
 
-#: app/bot/worker.py:63
+#: app/bot/worker.py:71
 msgid "Language"
-msgstr ""
+msgstr "Til"
+
+#: app/bot/worker.py:90
+#, fuzzy, python-format
+msgid "Name changed to %s"
+msgstr "Ism %s ga o'zgartirildi"
+
+#: app/bot/worker.py:97
+msgid "Change name"
+msgstr "Ismini o'zgartirish"
 
 #: authentication/api/views/auth_views.py:72
 msgid "Passwords does not match"
