@@ -4,7 +4,7 @@
 from queue import Queue
 
 from telegram.ext import (
-    Dispatcher, )
+    Dispatcher, MessageHandler, Filters, )
 
 from app.bot.base import bot
 from app.bot.worker import Worker
@@ -17,6 +17,7 @@ def setup_dispatcher(dp):
     """
 
     Worker.setup_commands(dp, dp.bot)
+    dp.add_handler(MessageHandler(Filters.text, Worker.handle_menu))
 
     # EXAMPLES FOR HANDLERS
     # dp.add_handler(MessageHandler(Filters.text, <function_handler>))

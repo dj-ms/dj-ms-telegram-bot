@@ -1,13 +1,15 @@
 import logging
 import sys
 from inspect import getmembers
+from typing import Iterable
 
 import telegram
 from django.utils import translation
+from django.utils.translation import gettext as _
 from telegram import Update, BotCommand, Bot
 from telegram.ext import CallbackContext, CommandHandler
 
-from app.bot.decorators import CommandMapper
+from app.bot.decorators import CommandMapper, MenuMapper, bot_menu, send_typing_action
 from app.models import User
 from core.settings import LANGUAGES, LANGUAGE_CODE, TELEGRAM_TOKEN
 
@@ -22,7 +24,11 @@ except telegram.error.Unauthorized:
 
 
 def _is_command(attr):
-    return hasattr(attr, 'mapping') and isinstance(attr.mapping, CommandMapper)
+    return hasattr(attr, 'command_mapping') and isinstance(attr.command_mapping, CommandMapper)
+
+
+def _is_menu(attr):
+    return hasattr(attr, 'menu_mapping') and isinstance(attr.menu_mapping, MenuMapper)
 
 
 def _check_attr_name(func, name):
@@ -32,6 +38,14 @@ def _check_attr_name(func, name):
         'decorated with `functools.wraps`, or that `{func.__name__}.__name__` '
         'is otherwise set to `{name}`.').format(func=func, name=name)
     return func
+
+
+def flatten(xs):
+    for x in xs:
+        if isinstance(x, Iterable) and not isinstance(x, (str, bytes)):
+            yield from flatten(x)
+        else:
+            yield x
 
 
 class BaseBotWorker:
@@ -46,10 +60,49 @@ class BaseBotWorker:
 
         def command():
             self = cls(update, context)
-            command_name = self.update.message.text.split('@')[0].replace('/', '')
-            return getattr(self, command_name)()
+            next_path = self.update.message.text.split('@')[0].replace('/', '')
+            current_path = self.context.user_data.get('path', 'start')
+            prev_path = self.context.user_data.get('last_path', 'start')
+            self.context.user_data.update({
+                'path': next_path,
+                'last_path': current_path,
+                'prev_path': prev_path
+            })
+            return getattr(self, next_path)()
 
         return command()
+
+    @classmethod
+    def handle_menu(cls, update, context):
+
+        def menu():
+            self = cls(update, context)
+            input_text = self.update.message.text
+            key_names = self.context.user_data.get('keyboard', [])
+            avail_menus = getmembers(cls, _is_menu)
+
+            assert input_text in key_names, (
+                'Expected input_text (`{input_text}`) to match key_names (`{key_names}`).').format(
+                input_text=input_text, key_names=key_names)
+            assert input_text in list(func.description for name, func in avail_menus), (
+                'Expected input_text (`{input_text}`) to match avail_menus (`{avail_menus}`).').format(
+                input_text=input_text, avail_menus=avail_menus)
+
+            next_path = next(name for name, func in avail_menus if func.description == input_text)
+            current_path = self.context.user_data.get('path', 'start')
+            last_path = self.context.user_data.get('last_path', 'start')
+
+            self.context.user_data.update({
+                'path': next_path,
+                'last_path': current_path,
+                'prev_path': last_path,
+            })
+            return getattr(self, next_path)()
+
+        try:
+            return menu()
+        except AssertionError as e:
+            logging.error(e)
 
     def set_language(self):
         language_code = self.user.language_code
@@ -57,22 +110,40 @@ class BaseBotWorker:
             language_code = LANGUAGE_CODE
         translation.activate(language_code)
 
+    def get_keyboard_markup(self, kb, resize_keyboard=True, **kwargs):
+        buttons_list = list(flatten(kb))
+        self.context.user_data.update({'keyboard': buttons_list})
+        return telegram.ReplyKeyboardMarkup(kb, resize_keyboard=resize_keyboard, **kwargs)
+
+    def clear_user_data(self):
+        self.context.user_data.clear()
+        self.context.user_data['path'] = 'start'
+        self.context.user_data['keyboard'] = []
+
     @classmethod
     def get_commands(cls):
         return [_check_attr_name(method, name) for name, method in getmembers(cls, _is_command)]
 
     @classmethod
-    def setup_commands(cls, dispatcher, bot):
+    def setup_commands(cls, dispatcher, bot_instance):
         commands = cls.get_commands()
         for command in commands:
             dispatcher.add_handler(CommandHandler(command.name, cls.handle_command))
 
-        bot.delete_my_commands()
+        bot_instance.delete_my_commands()
         language_codes = list(lang[0] for lang in LANGUAGES)
         for language_code in language_codes:
-            bot.set_my_commands(
+            bot_instance.set_my_commands(
                 language_code=language_code,
                 commands=[
                     BotCommand(command.name, command.description) for command in commands
                 ]
             )
+
+    @bot_menu(name='back', description=_('🔙 Back'))
+    @send_typing_action
+    def back(self) -> None:
+        prev_path = self.context.user_data.get('prev_path', 'start')
+        self.context.user_data.update({'path': prev_path})
+        getattr(self, prev_path)()
+
