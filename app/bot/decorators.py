@@ -63,10 +63,10 @@ def send_typing_action(func):
     """Sends typing action while processing func command."""
 
     @wraps(func)
-    def command_func(self):
+    def command_func(self, *args):
         self.context.bot.send_chat_action(
             chat_id=self.update.effective_message.chat_id, action=ChatAction.TYPING)
-        return func(self)
+        return func(self, *args)
 
     return command_func
 

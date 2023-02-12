@@ -53,7 +53,7 @@ class BaseBotWorker:
         self.update = update
         self.context = context
         self.user, self.user_created = User.get_user_and_created(self.update, self.context)
-        self.set_language()
+        self.__set_language()
 
     @classmethod
     def handle_command(cls, update, context):
@@ -61,13 +61,7 @@ class BaseBotWorker:
         def command():
             self = cls(update, context)
             next_path = self.update.message.text.split('@')[0].replace('/', '')
-            current_path = self.context.user_data.get('path', 'start')
-            prev_path = self.context.user_data.get('last_path', 'start')
-            self.context.user_data.update({
-                'path': next_path,
-                'last_path': current_path,
-                'prev_path': prev_path
-            })
+            self.__update_paths(next_path)
             return getattr(self, next_path)()
 
         return command()
@@ -84,31 +78,35 @@ class BaseBotWorker:
             assert input_text in key_names, (
                 'Expected input_text (`{input_text}`) to match key_names (`{key_names}`).').format(
                 input_text=input_text, key_names=key_names)
-            assert input_text in list(func.description for name, func in avail_menus), (
-                'Expected input_text (`{input_text}`) to match avail_menus (`{avail_menus}`).').format(
-                input_text=input_text, avail_menus=avail_menus)
+            if input_text in list(_(func.description) for name, func in avail_menus):
+                next_path = next(name for name, func in avail_menus if _(func.description) == input_text)
+                args = ()
+            else:
+                next_path = self.context.user_data.get('path', 'start')
+                args = (input_text, )
 
-            next_path = next(name for name, func in avail_menus if func.description == input_text)
-            current_path = self.context.user_data.get('path', 'start')
-            last_path = self.context.user_data.get('last_path', 'start')
-
-            self.context.user_data.update({
-                'path': next_path,
-                'last_path': current_path,
-                'prev_path': last_path,
-            })
-            return getattr(self, next_path)()
+            self.__update_paths(next_path)
+            return getattr(self, next_path)(*args)
 
         try:
             return menu()
         except AssertionError as e:
             logging.error(e)
 
-    def set_language(self):
+    def __set_language(self):
         language_code = self.user.language_code
         if language_code is None or language_code not in list(lang[0] for lang in LANGUAGES):
             language_code = LANGUAGE_CODE
         translation.activate(language_code)
+
+    def __update_paths(self, next_path):
+        current_path = self.context.user_data.get('path', 'start')
+        prev_path = self.context.user_data.get('last_path', 'start')
+        self.context.user_data.update({
+            'path': next_path,
+            'last_path': current_path,
+            'prev_path': prev_path
+        })
 
     def get_keyboard_markup(self, kb, resize_keyboard=True, **kwargs):
         buttons_list = list(flatten(kb))
