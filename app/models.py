@@ -9,6 +9,7 @@ from telegram import Update
 from telegram.ext import CallbackContext
 
 from app.bot.utils import extract_user_data_from_update
+from core.settings import LANGUAGES, LANGUAGE_CODE
 
 nb = dict(null=True, blank=True)
 
@@ -30,6 +31,7 @@ class CreateUpdateTracker(CreateTracker):
 
 class GetOrNoneManager(models.Manager):
     """returns none if object doesn't exist else model instance"""
+
     def get_or_none(self, **kwargs):
         try:
             return self.get(**kwargs)
@@ -64,8 +66,8 @@ class User(CreateUpdateTracker):
     def get_user_and_created(cls, update: Update, context: CallbackContext) -> Tuple[User, bool]:
         """ python-telegram-bot's Update, Context --> User instance """
         data = extract_user_data_from_update(update)
+        language_code = data.pop('language_code', None)
         u, created = cls.objects.update_or_create(user_id=data["user_id"], defaults=data)
-
         if created:
             # Save deep_link to User model
             if context is not None and context.args is not None and len(context.args) > 0:
@@ -73,7 +75,11 @@ class User(CreateUpdateTracker):
                 if str(payload).strip() != str(data["user_id"]).strip():  # you can't invite yourself
                     u.deep_link = payload
                     u.save()
-
+        allowed_langs = list(i[0] for i in LANGUAGES)
+        if u.language_code not in allowed_langs:
+            language_code = language_code if language_code in allowed_langs else LANGUAGE_CODE
+            u.language_code = language_code
+            u.save()
         return u, created
 
     @classmethod

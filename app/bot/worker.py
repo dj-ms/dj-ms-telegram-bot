@@ -52,6 +52,7 @@ class Worker(BaseBotWorker):
             language_code = next(lang[0] for lang in LANGUAGES if lang[1] == language_code)
             self.user.language_code = language_code
             self.user.save()
+            print(self.user.language_code)
             translation.activate(language_code)
             self.update.message.reply_text(text=_('Language changed to %s') % language_code,
                                            reply_to_message_id=self.update.message.message_id)
