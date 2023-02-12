@@ -1,10 +1,11 @@
 from inspect import getmembers
 
+from django.utils import translation
 from telegram import Update, BotCommand
 from telegram.ext import CallbackContext, CommandHandler
 
 from app.bot.decorators import CommandMapper
-from core.settings import LANGUAGES
+from core.settings import LANGUAGES, LANGUAGE_CODE
 
 
 def _is_command(attr):
@@ -24,6 +25,7 @@ class BaseBotWorker:
     def __init__(self, update: Update, context: CallbackContext):
         self.update = update
         self.context = context
+        self.set_language()
 
     @classmethod
     def handle_command(cls, update, context):
@@ -34,6 +36,12 @@ class BaseBotWorker:
             return getattr(self, command_name)()
 
         return command()
+
+    def set_language(self):
+        language_code = self.update.effective_user.language_code
+        if language_code is None or language_code not in dict(LANGUAGES.keys()):
+            language_code = LANGUAGE_CODE
+        translation.activate(language_code)
 
     @classmethod
     def get_commands(cls):

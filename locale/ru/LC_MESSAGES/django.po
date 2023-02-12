@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-11 11:09+0000\n"
+"POT-Creation-Date: 2023-02-12 07:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,9 +24,15 @@ msgstr ""
 msgid "Telegram bot"
 msgstr "Телеграм бот"
 
-#: app/bot/worker.py:31
-msgid "hi"
-msgstr "Привет"
+#: app/bot/worker.py:16
+#, python-format
+msgid "Welcome, %s!"
+msgstr "Добро пожаловать, %s!"
+
+#: app/bot/worker.py:18
+#, python-format
+msgid "Welcome back, %s!"
+msgstr "C возвращением, %s!"
 
 #: authentication/api/views/auth_views.py:72
 msgid "Passwords does not match"

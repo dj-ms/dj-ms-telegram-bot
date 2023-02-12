@@ -6,7 +6,6 @@ from telegram import Update
 
 from core.celery import app
 from core.settings import DEBUG
-from app.bot.dispatcher import dispatcher
 from app.bot.main import bot
 
 logger = logging.getLogger(__name__)
@@ -15,6 +14,7 @@ logger = logging.getLogger(__name__)
 @app.task(ignore_result=True)
 def process_telegram_event(update_json):
     update = Update.de_json(update_json, bot)
+    from app.bot.dispatcher import dispatcher
     dispatcher.process_update(update)
 
 
