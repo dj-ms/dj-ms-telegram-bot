@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-11 11:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: app/apps.py:8
+msgid "Telegram bot"
+msgstr "Телеграм бот"
+
+#: app/bot/worker.py:31
+msgid "hi"
+msgstr "Привет"
+
+#: authentication/api/views/auth_views.py:72
+msgid "Passwords does not match"
+msgstr "Пароли не совпадают"
+
+#: authentication/api/views/auth_views.py:81
+msgid "User with that email is already registered"
+msgstr "Пользователь с таким email уже зарегистрирован"
+
+#: authentication/api/views/auth_views.py:84
+msgid "User with that username is already registered"
+msgstr "Пользователь с таким именем уже зарегистрирован"
+
+#: authentication/models.py:51
+msgid "user"
+msgstr "пользователь"
+
+#: authentication/models.py:52
+msgid "users"
+msgstr "пользователи"
+
+#: authentication/models.py:57
+msgid "Key"
+msgstr "Ключ"
+
+#: authentication/models.py:58
+msgid "User"
+msgstr "Пользователь"
+
+#: authentication/models.py:59
+msgid "Created"
+msgstr "Создано"
+
+#: authentication/models.py:60
+msgid "Last use"
+msgstr "Последнее использование"
+
+#: authentication/models.py:64
+msgid "Token"
+msgstr "Токен"
+
+#: authentication/models.py:65
+msgid "Tokens"
+msgstr "Токены"
+
+#: core/settings.py:190
+msgid "English"
+msgstr "English"
+
+#: core/settings.py:191
+msgid "Russian"
+msgstr "Русский"
+
+#: core/settings.py:192
+msgid "Uzbek"
+msgstr "O'zbek"
