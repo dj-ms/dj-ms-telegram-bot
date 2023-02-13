@@ -35,6 +35,9 @@ For example, Django's translation system is used to provide multilingual support
 
 ## Getting started
 
+> Note: This project is not yet ready for production, like the original project.
+> Please, use it only for testing and development. It will be ready for production with release of version 1.0.0.
+
 1. Fork this project.
 
 2. Set it up and run according to the [dj-ms-core documentation](https://github.com/dj-ms/dj-ms-core/blob/master/README.md).
