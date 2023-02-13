@@ -24,12 +24,16 @@ For example, Django's translation system is used to provide multilingual support
 2. Set it up and run according to the [dj-ms-core documentation](https://github.com/dj-ms/dj-ms-core/blob/master/README.md).
 3. Look at example bots in `app/bot/workers` directory. Example files are named `example_*`.
 4. Create you own bot in `app/bot/workers` directory. You can use `example_*` files as a template.
-5. In `app.bot.dispatcher.py` change import of Worker class to your bot class:
-    comment out the line:
+5. In `app.bot.dispatcher.py` change import of Worker class to your bot class.
+    <br>
+    Comment out the line:
+
     ```python
     from app.bot.workers.example_main import Worker
     ```
+    <br>
     and add your bot class:
+    
     ```python
     from app.bot.workers.your_bot import Worker
     ```
