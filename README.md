@@ -7,9 +7,9 @@
 > Here is only the documentation related directly to the Telegram bot.
 
 ## Screenshots
-:----------------------:------------------------:-----------------------:
-![](/docs/media/1.png) | ![](/docs/media/2.png) | ![](/docs/media/3.png)
-
+|         First          |         Second         |                  Third |
+|:----------------------:|:----------------------:|-----------------------:|
+| ![](/docs/media/1.png) | ![](/docs/media/2.png) | ![](/docs/media/3.png) |
 
 ## About
 
