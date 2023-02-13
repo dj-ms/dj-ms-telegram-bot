@@ -7,7 +7,7 @@ from telegram.ext import (
     Dispatcher, MessageHandler, Filters, )
 
 from app.bot.base import bot
-from app.bot.worker import Worker
+from app.bot.workers.example_main import Worker
 from core.settings import DEBUG
 
 
