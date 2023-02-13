@@ -7,9 +7,7 @@
 > Here is only the documentation related directly to the Telegram bot.
 
 ## Screenshots
-<img src="/docs/media/1.png" alt="First" width=30%>
-<img src="/docs/media/2.png" alt="Second" width=30%>
-<img src="/docs/media/3.png" alt="Third" width=30%>
+<img src="/docs/media/1.png" alt="First" width=100><img src="/docs/media/2.png" alt="Second" width=100><img src="/docs/media/3.png" alt="Third" width=100>
 
 ## About
 
