@@ -27,13 +27,13 @@ For example, Django's translation system is used to provide multilingual support
 5. In `app.bot.dispatcher.py` change import of Worker class to your bot class.
     <br>
     Comment out the line:
-
+    <br>
     ```python
     from app.bot.workers.example_main import Worker
     ```
     <br>
     and add your bot class:
-    
+    <br>
     ```python
     from app.bot.workers.your_bot import Worker
     ```
