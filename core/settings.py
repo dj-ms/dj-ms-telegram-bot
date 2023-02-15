@@ -45,6 +45,12 @@ ALLOWED_HOSTS = [
     'localhost'
 ]
 
+extra_allowed_hosts = os.getenv('DJANGO_ALLOWED_HOSTS', None)
+
+if extra_allowed_hosts:
+    assert isinstance(extra_allowed_hosts.split(','), list)
+    ALLOWED_HOSTS.extend(extra_allowed_hosts.split(','))
+
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOWED_ORIGINS = (
@@ -56,6 +62,12 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 ]
+
+extra_csrf_trusted_origins = os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS', None)
+
+if extra_csrf_trusted_origins:
+    assert isinstance(extra_csrf_trusted_origins.split(','), list)
+    CSRF_TRUSTED_ORIGINS.extend(extra_csrf_trusted_origins.split(','))
 
 # Application definition
 

@@ -52,11 +52,11 @@ while [[ $# -gt 0 ]]; do
 done
 
 if $build; then
-  TAG=$(grep DJ_MS_CORE_VERSION .env | xargs | awk -F "=" '{print $2}')
-  if [[ -z "${TAG}" ]]; then
-    TAG="latest"
+  DOCKER_BASE_IMAGE=$(grep DOCKER_BASE_IMAGE .env | xargs | awk -F "=" '{print $2}')
+  if [[ -z "${DOCKER_BASE_IMAGE}" ]]; then
+    DOCKER_BASE_IMAGE="harleyking/dj-ms-core:latest"
   fi
-  . build.sh -t "$TAG" || exit 126
+  . build.sh -t "$DOCKER_BASE_IMAGE" || exit 126
 fi
 
 service_scale () {
@@ -110,7 +110,8 @@ if [[ ! -f nginx/default.d/${DJ_MS_APP_LABEL}.conf ]]; then
   Created nginx/default.d/${DJ_MS_APP_LABEL}.conf.
   Copy it to /etc/nginx/default.d/ manually and reload Nginx:
 
-  > cp nginx/default.d/${DJ_MS_APP_LABEL}.conf /etc/nginx/default.d/${DJ_MS_APP_LABEL}.conf
+  > cp nginx/default.d/${DJ_MS_APP_LABEL}.conf /etc/nginx/sites-available/${DJ_MS_APP_LABEL}.conf
+  > ln -s /etc/nginx/sites-available/${DJ_MS_APP_LABEL}.conf /etc/nginx/sites-enabled/${DJ_MS_APP_LABEL}.conf
   > nginx -s reload
 
   Tip: If you want to recreate the file, delete it and run this script again:

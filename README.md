@@ -35,6 +35,8 @@ For example, Django's translation system is used to provide multilingual support
 
 ## Getting started
 
+### Independent bot
+
 > Note: This project is not yet ready for production, like the original project.
 > Please, use it only for testing and development. It will be ready for production with release of version 1.0.0.
 
@@ -63,3 +65,14 @@ For example, Django's translation system is used to provide multilingual support
 
 6. Run the project and test your bot.
 
+
+### Microservice
+
+1. Fork this project.
+
+2. Set it up and run according to the [dj-ms-core documentation](https://github.com/dj-ms/dj-ms-core/blob/master/README.md).
+    > When setting up project, add next variables:
+    > - `TELEGRAM_TOKEN` environment variable with your Telegram bot token
+    > - DJ_MS_APP_LABEL=telegram-bot 
+    > - AUTH_DB_URL=postgres://postgres:postgres@`<MAIN_SERVICE_HOST>``<MAIN_DB_PORT>`/postgres 
+    > - BROKER_URL=amqp://rabbitmq:rabbitmq@`<MAIN_SERVICE_HOST>``<MAIN_RABBITMQ_PORT>`
