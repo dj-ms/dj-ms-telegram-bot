@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third party apps
+    'whitenoise.runserver_nostatic',
     'corsheaders',
     'rest_framework',
     'django_celery_beat',
@@ -98,6 +99,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'core.middleware.HealthCheckMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',

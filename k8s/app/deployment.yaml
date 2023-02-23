@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dj-ms-core
+  namespace: dj-ms-core
+  labels:
+    app.kubernetes.io/name: dj-ms-core
+    app.kubernetes.io/component: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dj-ms-core
+      app.kubernetes.io/component: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: dj-ms-core
+        app.kubernetes.io/component: web
+    spec:
+      containers:
+        - name: web
+          image: harleyking/dj-ms-core:latest
+          command: ["/home/django/entrypoint.prod.sh", "gunicorn", "core.wsgi"]
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: dj-ms-core-config
+            - secretRef:
+                name: dj-ms-core-secret
+        - name: celery
+          image: harleyking/dj-ms-core:latest
+          command: ["celery", "-A", "core", "worker", "-l", "info", "--concurrency", "1", "-P", "solo", "-E"]
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: dj-ms-core-config
+            - secretRef:
+                name: dj-ms-core-secret
+        - name: celery-beat
+          image: harleyking/dj-ms-core:latest
+          command: ["celery", "-A", "core", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers.DatabaseScheduler"]
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: dj-ms-core-config
+            - secretRef:
+                name: dj-ms-core-secret
