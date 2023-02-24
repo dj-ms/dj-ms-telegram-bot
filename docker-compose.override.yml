@@ -10,3 +10,22 @@ services:
   celery-beat:
     volumes:
       - .:/home/django/
+  telegram-bot:
+    image: harleyking/dj-ms-${DJ_MS_APP_LABEL:-core}:${DJ_MS_CORE_VERSION:-latest}
+    build:
+      context: .
+    command: python run_polling.py
+    volumes:
+      - .:/home/django/
+    depends_on:
+      django:
+          condition: service_healthy
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+          condition: service_healthy
+    environment:
+      - BROKER_URL=amqp://${RABBITMQ_DEFAULT_USER:-rabbitmq}:${RABBITMQ_DEFAULT_PASS:-rabbitmq}@rabbitmq:5672
+      - DATABASE_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres/${POSTGRES_DB:-postgres}
+    env_file:
+      - .env

@@ -72,6 +72,7 @@ But all of them will be under one domain and will have unified authentication.
   
 ### [Deploy to production using Kubernetes](docs/deploy_in_production_using_k8s.md)  
   
+### [Build Telegram bot](docs/telegram_bot.md)
   
 ---
 ## Examples  

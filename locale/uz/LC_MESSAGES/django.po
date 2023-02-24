@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-12 17:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/apps.py:8
+msgid "Telegram bot"
+msgstr "Telegram bot"
+
+#: app/bot/base.py:127 app/bot/worker.py:44 app/bot/worker.py:67
+#: app/bot/worker.py:94
+msgid "🔙 Back"
+msgstr "🔙 Orqaga"
+
+#: app/bot/worker.py:13
+msgid "🚀 Restart"
+msgstr "🚀 Qayta ishga tushirish"
+
+#: app/bot/worker.py:20
+#, python-format
+msgid "Welcome, %s!"
+msgstr "Hush kelibsiz, %s!"
+
+#: app/bot/worker.py:22
+#, python-format
+msgid "Welcome back, %s!"
+msgstr "Assalomu alaykum, %s!"
+
+#: app/bot/worker.py:24 app/bot/worker.py:39 app/bot/worker.py:40
+msgid "⚙️ Settings"
+msgstr "⚙️ Sozlamalar"
+
+#: app/bot/worker.py:28
+#, python-format
+msgid "Hi there! I am %s."
+msgstr "Hammage salom! Men %sman."
+
+#: app/bot/worker.py:34 app/bot/worker.py:44
+msgid "🏠 Home"
+msgstr "🏠 Bosh sahifa"
+
+#: app/bot/worker.py:45 app/bot/worker.py:52 app/bot/worker.py:53
+msgid "🌐 Language"
+msgstr "🌐 Til"
+
+#: app/bot/worker.py:45 app/bot/worker.py:75
+msgid "👤 Change name"
+msgstr "👤 Ismni o'zgartirish"
+
+#: app/bot/worker.py:48
+msgid "Settings"
+msgstr "Sozlamalar"
+
+#: app/bot/worker.py:63
+#, python-format
+msgid "Language changed to %s"
+msgstr "Til %s ga o'zgartirildi"
+
+#: app/bot/worker.py:71
+msgid "Language"
+msgstr "Til"
+
+#: app/bot/worker.py:90
+#, fuzzy, python-format
+msgid "Name changed to %s"
+msgstr "Ism %s ga o'zgartirildi"
+
+#: app/bot/worker.py:97
+msgid "Change name"
+msgstr "Ismini o'zgartirish"
+
+#: authentication/api/views/auth_views.py:72
+msgid "Passwords does not match"
+msgstr "Parollar birxil emas"
+
+#: authentication/api/views/auth_views.py:81
+msgid "User with that email is already registered"
+msgstr "Bu elektron pochta allaqachon ro'yxatdan o'tgan"
+
+#: authentication/api/views/auth_views.py:84
+msgid "User with that username is already registered"
+msgstr "Bu foydalanuvchi nomi allaqachon ro'yxatdan o'tgan"
+
+#: authentication/models.py:51
+msgid "user"
+msgstr "foydalanuvchi"
+
+#: authentication/models.py:52
+msgid "users"
+msgstr "foydalanuvchilar"
+
+#: authentication/models.py:57
+msgid "Key"
+msgstr "Kalit"
+
+#: authentication/models.py:58
+msgid "User"
+msgstr "Foydalanuvchi"
+
+#: authentication/models.py:59
+msgid "Created"
+msgstr "Yaratilgan"
+
+#: authentication/models.py:60
+msgid "Last use"
+msgstr "Oxirgi foydalanish"
+
+#: authentication/models.py:64
+msgid "Token"
+msgstr "Token"
+
+#: authentication/models.py:65
+msgid "Tokens"
+msgstr "Tokenlar"
+
+#: core/settings.py:190
+msgid "English"
+msgstr "English"
+
+#: core/settings.py:191
+msgid "Russian"
+msgstr "Русский"
+
+#: core/settings.py:192
+msgid "Uzbek"
+msgstr "O'zbek"

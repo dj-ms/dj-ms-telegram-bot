@@ -34,3 +34,7 @@ pika
 
 # Sentry
 sentry-sdk
+
+# Telegram
+python-telegram-bot==13.11  # last sync version
+
