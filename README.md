@@ -1,78 +1,91 @@
-# Django Telegram bot
+# Django microservice core
 
 
-> This project is fork of [dj-ms-core](https://github.com/dj-ms/dj-ms-core).
-> The main documentation is kept there.
-> 
-> Here is only the documentation related directly to the Telegram bot.
-
-## Screenshots
-|                        |                        |                        |
-|:----------------------:|:----------------------:|-----------------------:|
-| ![](/docs/media/1.png) | ![](/docs/media/2.png) | ![](/docs/media/3.png) |
-
-## About
-
-This project is inspired by [ohld/django-telegram-bot](https://github.com/ohld/django-telegram-bot).
-Like the original project, it is:
-- based on [python-telegram-bot](https://python-telegram-bot.org/).
-- uses Django as a web framework.
-- uses Celery as a task queue.
-- uses PostgreSQL as a database.
-- uses Redis as a cache.
-- uses Docker and Docker Compose for development and deployment.
-
-Additionally, what was added:
-- multilingual support (using Django's translation system).
-- microservice architecture support (using [dj-ms-core](https://github.com/dj-ms/dj-ms-core)).
-- Implementation of some features, such as nested menus.
-- RabbitMQ as a message broker (from `dj-ms-core`).
-- Kubernetes support (from `dj-ms-core`).
-
-The main difference is that this project aims to be more flexible and to provide more features.
-For example, Django's translation system is used to provide multilingual support.
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/dj-ms/dj-ms-core?display_name=release&style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/dj-ms/dj-ms-core?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/dj-ms/dj-ms-core?style=for-the-badge)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/dj-ms/dj-ms-core?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/dj-ms/dj-ms-core?style=for-the-badge)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/harleyking/dj-ms-core?style=for-the-badge)
 
 
-## Getting started
+---
+## Purpose
+<h3>
+This project helps to develop microservices with Django Framework.
 
-### Independent bot
+No more tens of apps in one project.
+Separate your apps into microservices and connect them under one domain.
+Every Django app can be developed and deployed separately, even by different teams.
+But all of them will be under one domain and will have unified authentication.
 
-> Note: This project is not yet ready for production, like the original project.
-> Please, use it only for testing and development. It will be ready for production with release of version 1.0.0.
-
-1. Fork this project.
-
-2. Set it up and run according to the [dj-ms-core documentation](https://github.com/dj-ms/dj-ms-core/blob/master/README.md).
-    > When setting up project, just add `TELEGRAM_TOKEN` environment variable with your Telegram bot token.
-
-3. Look at example bots in `app/bot/workers` directory. Example files are named `example_*`.
-
-4. Create you own bot in `app/bot/workers` directory. You can use `example_*` files as a template.
-
-5. In `app.bot.dispatcher.py` change import of Worker class to your bot class.
-
-    Comment out the line:
-
-    ```
-    from app.bot.workers.example_main import Worker
-    ```
-
-    and add your bot class:
-
-    ```
-    from app.bot.workers.your_bot import Worker
-    ```
-
-6. Run the project and test your bot.
+</h3>
 
 
-### Microservice
+---
+> #### Note: First of all this is simple Django project with some customizations. If you are newbie in Django, you can use this project as a template for your own projects. I'm not very cool in programming, but I have some experience in Python and Django and want to share it with you.
 
-1. Fork this project.
 
-2. Set it up and run according to the [dj-ms-core documentation](https://github.com/dj-ms/dj-ms-core/blob/master/README.md).
-    > When setting up project, add next variables:
-    > - `TELEGRAM_TOKEN` environment variable with your Telegram bot token
-    > - DJ_MS_APP_LABEL=telegram-bot 
-    > - AUTH_DB_URL=postgres://postgres:postgres@`<MAIN_SERVICE_HOST>``<MAIN_DB_PORT>`/postgres 
-    > - BROKER_URL=amqp://rabbitmq:rabbitmq@`<MAIN_SERVICE_HOST>``<MAIN_RABBITMQ_PORT>`
+---
+> #### Not ready for production. Will be ready with version 1.0.0
+
+
+---
+## How it works
+<p align="center">
+  <img src="docs/media/scheme.png" alt="How it works" align="center">
+</p>
+
+
+---
+## What's inside
+- [x] Unified authentication in all microservices
+- [x] Production deployment with Docker Compose or Kubernetes
+- [x] Celery, Celery Beat, RabbitMQ, Postgres and Nginx included in Docker Compose
+- [x] Expiring Bearer Token authentication
+- [x] Custom user model
+- [x] Custom db router for auth models
+- [x] Object changes logging to one DB with [django-auditlog](https://github.com/jazzband/django-auditlog)
+- [x] Static and media files served by Nginx
+- [ ] Message brokers integration (there is RabbitMQ in docker compose, but at this time it's only used by Celery)
+- [ ] Automated CI/CD either with GitHub Actions, GitLab CI or Bitbucket Pipelines
+- [ ] Active directory authentication
+- [ ] Automatic discovery of microservices
+
+
+---
+## Requirements
+  
+- Docker and Docker Compose - [Download](https://docs.docker.com/get-docker/)  
+> Of course, you can just run project without docker right on your machine. But docker is recommended way.
+  
+- Python 3.10 - [Download](https://www.python.org/downloads/)  
+> You will need Python only if you want to run this project locally without docker.
+
+
+---
+## Installation  
+  
+### [Run locally using docker compose](docs/run_locally_using_docker_compose.md)  
+  
+### [Deploy to server using docker compose](docs/deploy_to_server_using_docker_compose.md)  
+  
+### [Deploy to production using Kubernetes](docs/deploy_in_production_using_k8s.md)  
+  
+### [Build Telegram bot](docs/telegram_bot.md)
+  
+---
+## Examples  
+
+You can find example microservice apps under [forks](https://github.com/dj-ms/dj-ms-core/network/members) section.  
+  
+Also, there is special example repos:  
+- [dj-ms-example-app](https://github.com/dj-ms/dj-ms-example-app)  
+- [dj-ms-telegram-bot](https://github.com/dj-ms/dj-ms-telegram-bot)  
+
+
+---
+## Contributing
+I will be very happy if you will contribute to this project. You can help with code, documentation, ideas, etc.
+Just create an issue or pull request. I will be glad to discuss it with you.
+Also, you can contact me via email: astafeev0308@gmail.com.
