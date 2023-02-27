@@ -38,6 +38,13 @@ class Worker(BaseBotWorker):
     def home(self, *args) -> None:
         return self.start()
 
+    @bot_menu(name='back', description='🔙 Back')
+    @send_typing_action
+    def back(self) -> None:
+        prev_path = self.context.user_data.get('prev_path', 'start')
+        self.context.user_data.update({'path': prev_path})
+        getattr(self, prev_path)()
+
     @bot_menu(name='settings', description=_('⚙️ Settings'))
     @bot_command(name='settings', description=_('⚙️ Settings'))
     @send_typing_action
@@ -61,8 +68,9 @@ class Worker(BaseBotWorker):
             self.user.language_code = language_code
             self.user.save()
             lang_name = next(lang[1] for lang in LANGUAGES if _(lang[0]) == language_code)
-            self.send_message(self.update.message.chat.id, text=_('Language changed to %s') % lang_name)
-            return self.start()
+            with translation.override(language_code):
+                self.send_message(self.update.message.chat.id, text=_('Language changed to %s') % lang_name)
+                return self.start()
         languages = list(str(lang[1]) for lang in LANGUAGES)
         kb = [[_('🔙 Back')], *list(chunks(languages, 3))]
         reply_markup = self.get_keyboard_markup(kb)

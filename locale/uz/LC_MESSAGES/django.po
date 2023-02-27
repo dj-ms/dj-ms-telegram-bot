@@ -78,9 +78,8 @@ msgid "Language"
 msgstr "Til"
 
 #: app/bot/workers/example_main.py:86
-#, fuzzy, python-format
 msgid "Your name changed to %s"
-msgstr "Ism %s ga o'zgartirildi"
+msgstr "Ismingiz %s ga o'zgartirildi"
 
 #: app/bot/workers/example_main.py:90
 msgid "Change name"

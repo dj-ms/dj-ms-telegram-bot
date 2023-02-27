@@ -121,11 +121,3 @@ class BaseBotWorker:
         self.context.user_data.clear()
         self.context.user_data['path'] = 'start'
         self.context.user_data['keyboard'] = []
-
-    @bot_menu(name='back', description='🔙 Back')
-    @send_typing_action
-    def back(self) -> None:
-        prev_path = self.context.user_data.get('prev_path', 'start')
-        self.context.user_data.update({'path': prev_path})
-        getattr(self, prev_path)()
-
