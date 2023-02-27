@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-12 17:27+0000\n"
+"POT-Creation-Date: 2023-02-27 11:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,65 +24,67 @@ msgstr ""
 msgid "Telegram bot"
 msgstr "Телеграм бот"
 
-#: app/bot/base.py:127 app/bot/worker.py:44 app/bot/worker.py:67
-#: app/bot/worker.py:94
+#: app/bot/base.py:128 app/bot/workers/example_main.py:50
+#: app/bot/workers/example_main.py:72 app/bot/workers/example_main.py:97
 msgid "🔙 Back"
 msgstr "🔙 Назад"
 
-#: app/bot/worker.py:13
+#: app/bot/workers/example_main.py:19
 msgid "🚀 Restart"
 msgstr "🚀 Перезапуск"
 
-#: app/bot/worker.py:20
+#: app/bot/workers/example_main.py:26
 #, python-format
 msgid "Welcome, %s!"
 msgstr "Добро пожаловать, %s!"
 
-#: app/bot/worker.py:22
+#: app/bot/workers/example_main.py:28
 #, python-format
 msgid "Welcome back, %s!"
 msgstr "C возвращением, %s!"
 
-#: app/bot/worker.py:24 app/bot/worker.py:39 app/bot/worker.py:40
+#: app/bot/workers/example_main.py:30 app/bot/workers/example_main.py:45
+#: app/bot/workers/example_main.py:46
 msgid "⚙️ Settings"
 msgstr "⚙️ Настройки"
 
-#: app/bot/worker.py:28
+#: app/bot/workers/example_main.py:34
 #, python-format
 msgid "Hi there! I am %s."
-msgstr "Все привет! Я %s."
+msgstr "Всем привет! Я %s."
 
-#: app/bot/worker.py:34 app/bot/worker.py:44
+#: app/bot/workers/example_main.py:40 app/bot/workers/example_main.py:50
 msgid "🏠 Home"
 msgstr "🏠 Главная"
 
-#: app/bot/worker.py:45 app/bot/worker.py:52 app/bot/worker.py:53
+#: app/bot/workers/example_main.py:51 app/bot/workers/example_main.py:57
+#: app/bot/workers/example_main.py:58
 msgid "🌐 Language"
 msgstr "🌐 Язык"
 
-#: app/bot/worker.py:45 app/bot/worker.py:75
+#: app/bot/workers/example_main.py:51 app/bot/workers/example_main.py:79
 msgid "👤 Change name"
 msgstr "👤 Изменить имя"
 
-#: app/bot/worker.py:48
+#: app/bot/workers/example_main.py:54
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/bot/worker.py:63
+#: app/bot/workers/example_main.py:68
 #, python-format
 msgid "Language changed to %s"
 msgstr "Язык изменен на %s"
 
-#: app/bot/worker.py:71
+#: app/bot/workers/example_main.py:76
 msgid "Language"
 msgstr "Язык"
 
-#: app/bot/worker.py:90
+#: app/bot/workers/example_main.py:94
 #, fuzzy, python-format
 msgid "Name changed to %s"
 msgstr "Имя изменено на %s"
 
-#: app/bot/worker.py:97
+#: app/bot/workers/example_main.py:100
 msgid "Change name"
 msgstr "Изменить имя"
 
@@ -130,14 +132,14 @@ msgstr "Токен"
 msgid "Tokens"
 msgstr "Токены"
 
-#: core/settings.py:190
+#: core/settings.py:204
 msgid "English"
 msgstr "English"
 
-#: core/settings.py:191
+#: core/settings.py:205
 msgid "Russian"
 msgstr "Русский"
 
-#: core/settings.py:192
+#: core/settings.py:206
 msgid "Uzbek"
 msgstr "O'zbek"

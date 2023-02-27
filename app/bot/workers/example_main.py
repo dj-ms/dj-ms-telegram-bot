@@ -97,5 +97,6 @@ class Worker(BaseBotWorker):
             [_('🔙 Back')],
         ]
         reply_markup = self.get_keyboard_markup(kb)
-        self.context.bot.send_message(self.update.message.chat.id, text=_('Change name'),
+        self.context.bot.send_message(self.update.message.chat.id,
+                                      text=_('Change name'),
                                       reply_markup=reply_markup)

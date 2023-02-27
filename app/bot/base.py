@@ -94,10 +94,11 @@ class BaseBotWorker:
             'prev_path': prev_path
         })
 
-    def get_keyboard_markup(self, kb, resize_keyboard=True, **kwargs):
+    def get_keyboard_markup(self, kb, resize_keyboard=True, one_time_keyboard=True, **kwargs):
         buttons_list = list(flatten(kb))
         self.context.user_data.update({'keyboard': buttons_list})
-        return telegram.ReplyKeyboardMarkup(kb, resize_keyboard=resize_keyboard, **kwargs)
+        return telegram.ReplyKeyboardMarkup(kb, resize_keyboard=resize_keyboard,
+                                            one_time_keyboard=one_time_keyboard, **kwargs)
 
     def clear_user_data(self):
         self.context.user_data.clear()
