@@ -65,7 +65,8 @@ class Worker(BaseBotWorker):
             self.user.language_code = language_code
             self.user.save()
             translation.activate(language_code)
-            self.context.bot.send_message(self.update.message.chat.id, text=_('Language changed to %s') % language_code)
+            lang_name = next(lang[1] for lang in LANGUAGES if lang[0] == language_code)
+            self.context.bot.send_message(self.update.message.chat.id, text=_('Language changed to %s') % lang_name)
             return self.start()
         languages = list(str(lang[1]) for lang in LANGUAGES)
         kb = [
