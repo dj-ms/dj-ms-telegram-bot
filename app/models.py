@@ -87,7 +87,6 @@ class User(CreateUpdateTracker):
             language_code = language_code if language_code in allowed_langs else LANGUAGE_CODE
             u.language_code = language_code
             u.save()
-        translation.activate(u.language_code)
         return u, created
 
     @classmethod

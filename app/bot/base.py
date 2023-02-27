@@ -95,6 +95,10 @@ class BaseBotWorker:
             'prev_path': prev_path
         })
 
+    def send_message(self, chat_id, text, reply_markup=None, **kwargs):
+        with translation.override(self.user.language_code):
+            return self.context.bot.send_message(chat_id=chat_id, text=_(text), reply_markup=reply_markup, **kwargs)
+
     def get_keyboard_markup(self, kb, resize_keyboard=True, one_time_keyboard=True, **kwargs):
         buttons_list = list(flatten(kb))
         self.context.user_data.update({'keyboard': buttons_list})
@@ -119,13 +123,13 @@ class BaseBotWorker:
         bot_instance.delete_my_commands()
         language_codes = list(lang[0] for lang in LANGUAGES)
         for language_code in language_codes:
-            translation.activate(language_code)
-            bot_instance.set_my_commands(
-                language_code=language_code,
-                commands=[
-                    BotCommand(command.name, _(command.description)) for command in commands
-                ]
-            )
+            with translation.override(language_code):
+                bot_instance.set_my_commands(
+                    language_code=language_code,
+                    commands=[
+                        BotCommand(command.name, _(command.description)) for command in commands
+                    ]
+                )
 
     @bot_menu(name='back', description=_('🔙 Back'))
     @send_typing_action
