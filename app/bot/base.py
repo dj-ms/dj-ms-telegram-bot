@@ -54,6 +54,10 @@ class BaseBotWorker:
         self.context = context
         self.user, self.user_created = User.get_user_and_created(self.update, self.context)
 
+    def trans(self, string):
+        with translation.override(self.user.language_code):
+            return str(_(string))
+
     @classmethod
     def handle_command(cls, update, context):
 
@@ -72,8 +76,11 @@ class BaseBotWorker:
             self = cls(update, context)
             input_text = self.update.message.text
             avail_menus = getmembers(cls, _is_menu)
-            if input_text in list(_(func.description) for name, func in avail_menus):
-                next_path = next(name for name, func in avail_menus if _(func.description) == input_text)
+            with translation.override(self.user.language_code):
+                menus = list(_(func.description) for name, func in avail_menus)
+            if input_text in menus:
+                with translation.override(self.user.language_code):
+                    next_path = next(name for name, func in avail_menus if _(func.description) == input_text)
                 args = ()
             else:
                 next_path = self.context.user_data.get('path', 'start')
@@ -131,7 +138,7 @@ class BaseBotWorker:
                     ]
                 )
 
-    @bot_menu(name='back', description=_('🔙 Back'))
+    @bot_menu(name='back', description='🔙 Back')
     @send_typing_action
     def back(self) -> None:
         prev_path = self.context.user_data.get('prev_path', 'start')
