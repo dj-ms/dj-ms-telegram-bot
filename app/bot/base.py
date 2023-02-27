@@ -4,6 +4,7 @@ from inspect import getmembers
 from typing import Iterable
 
 import telegram
+from django.utils import translation
 from django.utils.translation import gettext as _
 from telegram import Update, BotCommand, Bot
 from telegram.ext import CallbackContext, CommandHandler
@@ -118,6 +119,7 @@ class BaseBotWorker:
         bot_instance.delete_my_commands()
         language_codes = list(lang[0] for lang in LANGUAGES)
         for language_code in language_codes:
+            translation.activate(language_code)
             bot_instance.set_my_commands(
                 language_code=language_code,
                 commands=[
