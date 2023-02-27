@@ -53,11 +53,12 @@ class Worker(BaseBotWorker):
     @bot_menu(name='language', description=_('🌐 Language'))
     @bot_command(name='language', description=_('🌐 Language'))
     @send_typing_action
-    def language(self, language_code: str = None) -> None:
-        if language_code is not None:
-            if language_code not in list(lang[1] for lang in LANGUAGES):
+    def language(self, language_name: str = None) -> None:
+        if language_name is not None:
+            if language_name in list(_(lang[1]) for lang in LANGUAGES):
+                language_code = next(lang[0] for lang in LANGUAGES if language_name == _(lang[1]))
+            else:
                 language_code = LANGUAGE_CODE
-            language_code = next(lang[0] for lang in LANGUAGES if lang[1] == language_code)
             self.user.language_code = language_code
             self.user.save()
             lang_name = next(lang[1] for lang in LANGUAGES if lang[0] == language_code)

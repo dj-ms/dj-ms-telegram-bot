@@ -63,17 +63,12 @@ class BaseBotWorker:
         commands = cls.get_commands()
         for command in commands:
             dispatcher.add_handler(CommandHandler(command.name, cls.handle_command))
-
         bot_instance.delete_my_commands()
         language_codes = list(lang[0] for lang in LANGUAGES)
         for language_code in language_codes:
             with translation.override(language_code):
-                bot_instance.set_my_commands(
-                    language_code=language_code,
-                    commands=[
-                        BotCommand(command.name, _(command.description)) for command in commands
-                    ]
-                )
+                bot_commands = list(BotCommand(command.name, _(command.description)) for command in commands)
+            bot_instance.set_my_commands(language_code=language_code, commands=bot_commands)
 
     @classmethod
     def handle_command(cls, update, context):
@@ -118,7 +113,7 @@ class BaseBotWorker:
             'prev_path': prev_path
         })
 
-    def get_keyboard_markup(self, kb, resize_keyboard=True, one_time_keyboard=True, **kwargs):
+    def get_keyboard_markup(self, kb, resize_keyboard=True, one_time_keyboard=False, **kwargs):
         buttons_list = list(flatten(kb))
         self.context.user_data.update({'keyboard': buttons_list})
         return telegram.ReplyKeyboardMarkup(kb, resize_keyboard=resize_keyboard,
