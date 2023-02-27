@@ -72,37 +72,32 @@ class BaseBotWorker:
 
     @classmethod
     def handle_command(cls, update, context):
-
-        def command():
-            self = cls(update, context)
-            with translation.override(self.user.language_code):
-                next_path = self.update.message.text.split('@')[0].replace('/', '')
-                self.__update_paths(next_path)
-                return getattr(self, next_path)()
-
-        return command()
+        self = cls(update, context)
+        next_path = self.update.message.text.split('@')[0].replace('/', '')
+        self.__update_paths(next_path)
+        command = getattr(self, next_path)
+        with translation.override(self.user.language_code):
+            return command()
 
     @classmethod
     def handle_menu(cls, update, context):
-
-        def menu():
-            self = cls(update, context)
-            with translation.override(self.user.language_code):
-                input_text = self.update.message.text
-                avail_menus = getmembers(cls, _is_menu)
-                if input_text in list(_(func.description) for name, func in avail_menus):
-                    next_path = next(name for name, func in avail_menus if _(func.description) == input_text)
-                    args = ()
-                else:
-                    next_path = self.context.user_data.get('path', 'start')
-                    args = (input_text, )
-                self.__update_paths(next_path)
-                return getattr(self, next_path)(*args)
-
-        try:
-            return menu()
-        except AssertionError as e:
-            logging.error(e)
+        self = cls(update, context)
+        input_text = self.update.message.text
+        avail_menus = getmembers(cls, _is_menu)
+        with translation.override(self.user.language_code):
+            avail_menu_names = list(_(func.description) for name, func in avail_menus)
+            if input_text in avail_menu_names:
+                next_path = next(name for name, func in avail_menus if _(func.description) == input_text)
+                args = ()
+            else:
+                next_path = self.context.user_data.get('path', 'start')
+                args = (input_text, )
+            self.__update_paths(next_path)
+            try:
+                menu = getattr(self, next_path)
+                return menu(*args)
+            except AssertionError as e:
+                logging.error(e)
 
     def __update_paths(self, next_path):
         current_path = self.context.user_data.get('path', 'start')
@@ -120,16 +115,14 @@ class BaseBotWorker:
                                             one_time_keyboard=one_time_keyboard, **kwargs)
 
     def send_message(self, chat_id, text, reply_markup=None, **kwargs):
-        with translation.override(self.user.language_code):
-            text = _(text)
-        return self.context.bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup, **kwargs)
+        return self.context.bot.send_message(chat_id=chat_id, text=_(text), reply_markup=reply_markup, **kwargs)
 
     def clear_user_data(self):
         self.context.user_data.clear()
         self.context.user_data['path'] = 'start'
         self.context.user_data['keyboard'] = []
 
-    @bot_menu(name='back', description=_('🔙 Back'))
+    @bot_menu(name='back', description='🔙 Back')
     @send_typing_action
     def back(self) -> None:
         prev_path = self.context.user_data.get('prev_path', 'start')

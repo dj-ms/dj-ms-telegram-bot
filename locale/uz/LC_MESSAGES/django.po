@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 11:54+0000\n"
+"POT-Creation-Date: 2023-02-27 18:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,6 @@ msgstr ""
 #: app/apps.py:8
 msgid "Telegram bot"
 msgstr "Telegram bot"
-
-#: app/bot/base.py:128 app/bot/workers/example_main.py:50
-#: app/bot/workers/example_main.py:72 app/bot/workers/example_main.py:97
-msgid "🔙 Back"
-msgstr "🔙 Orqaga"
 
 #: app/bot/workers/example_main.py:19
 msgid "🚀 Restart"
@@ -41,48 +36,53 @@ msgstr "Hush kelibsiz, %s!"
 msgid "Welcome back, %s!"
 msgstr "Assalomu alaykum, %s!"
 
-#: app/bot/workers/example_main.py:30 app/bot/workers/example_main.py:45
-#: app/bot/workers/example_main.py:46
+#: app/bot/workers/example_main.py:29 app/bot/workers/example_main.py:41
+#: app/bot/workers/example_main.py:42
 msgid "⚙️ Settings"
 msgstr "⚙️ Sozlamalar"
 
-#: app/bot/workers/example_main.py:34
+#: app/bot/workers/example_main.py:32
 #, python-format
 msgid "Hi there! I am %s."
 msgstr "Hammaga salom! Men %sman."
 
-#: app/bot/workers/example_main.py:40 app/bot/workers/example_main.py:50
+#: app/bot/workers/example_main.py:36 app/bot/workers/example_main.py:46
 msgid "🏠 Home"
 msgstr "🏠 Bosh sahifa"
 
-#: app/bot/workers/example_main.py:51 app/bot/workers/example_main.py:57
-#: app/bot/workers/example_main.py:58
+#: app/bot/workers/example_main.py:46 app/bot/workers/example_main.py:67
+#: app/bot/workers/example_main.py:88
+msgid "🔙 Back"
+msgstr "🔙 Orqaga"
+
+#: app/bot/workers/example_main.py:47 app/bot/workers/example_main.py:52
+#: app/bot/workers/example_main.py:53
 msgid "🌐 Language"
 msgstr "🌐 Til"
 
-#: app/bot/workers/example_main.py:51 app/bot/workers/example_main.py:79
+#: app/bot/workers/example_main.py:47 app/bot/workers/example_main.py:71
 msgid "👤 Change name"
 msgstr "👤 Ismni o'zgartirish"
 
-#: app/bot/workers/example_main.py:54
+#: app/bot/workers/example_main.py:50
 msgid "Settings"
 msgstr "Sozlamalar"
 
-#: app/bot/workers/example_main.py:68
+#: app/bot/workers/example_main.py:64
 #, python-format
 msgid "Language changed to %s"
 msgstr "Til %s ga o'zgartirildi"
 
-#: app/bot/workers/example_main.py:76
+#: app/bot/workers/example_main.py:69
 msgid "Language"
 msgstr "Til"
 
-#: app/bot/workers/example_main.py:94
+#: app/bot/workers/example_main.py:86
 #, fuzzy, python-format
-msgid "Name changed to %s"
+msgid "Your name changed to %s"
 msgstr "Ism %s ga o'zgartirildi"
 
-#: app/bot/workers/example_main.py:100
+#: app/bot/workers/example_main.py:90
 msgid "Change name"
 msgstr "Ismini o'zgartirish"
 

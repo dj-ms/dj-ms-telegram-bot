@@ -5,7 +5,6 @@ from django.utils.translation import gettext as _
 
 from app.bot.base import BaseBotWorker
 from app.bot.decorators import bot_command, send_typing_action, bot_menu
-from app.models import User
 from core.settings import LANGUAGES, LANGUAGE_CODE
 
 
@@ -61,10 +60,9 @@ class Worker(BaseBotWorker):
                 language_code = LANGUAGE_CODE
             self.user.language_code = language_code
             self.user.save()
-            lang_name = next(lang[1] for lang in LANGUAGES if lang[0] == language_code)
-            with translation.override(language_code):
-                self.send_message(self.update.message.chat.id, text=_('Language changed to %s') % lang_name)
-                return self.start()
+            lang_name = next(lang[1] for lang in LANGUAGES if _(lang[0]) == language_code)
+            self.send_message(self.update.message.chat.id, text=_('Language changed to %s') % lang_name)
+            return self.start()
         languages = list(str(lang[1]) for lang in LANGUAGES)
         kb = [[_('🔙 Back')], *list(chunks(languages, 3))]
         reply_markup = self.get_keyboard_markup(kb)
@@ -85,7 +83,7 @@ class Worker(BaseBotWorker):
                 self.user.first_name = first_name
                 self.user.last_name = last_name
                 self.user.save()
-                self.send_message(self.update.message.chat.id, text=_('Name changed to %s') % new_name_str)
+                self.send_message(self.update.message.chat.id, text=_('Your name changed to %s') % new_name_str)
                 return self.start()
         kb = [[_('🔙 Back')], ]
         reply_markup = self.get_keyboard_markup(kb)
