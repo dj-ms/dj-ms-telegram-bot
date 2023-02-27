@@ -33,9 +33,9 @@ class Worker(BaseBotWorker):
         else:
             text = _('Hi there! I am %s.') % self.context.bot.first_name
             reply_markup = None
-        self.update.message.reply_text(text=text,
-                                       reply_to_message_id=self.update.message.message_id,
-                                       reply_markup=reply_markup)
+        self.context.bot.send_message(self.update.message.chat.id,
+                                      text=text,
+                                      reply_markup=reply_markup)
 
     @bot_menu(name='home', description=_('🏠 Home'))
     @send_typing_action
@@ -51,9 +51,8 @@ class Worker(BaseBotWorker):
             [_('🌐 Language'), _('👤 Change name')],
         ]
         reply_markup = self.get_keyboard_markup(kb)
-        self.update.message.reply_text(text=_('Settings'),
-                                       reply_to_message_id=self.update.message.message_id,
-                                       reply_markup=reply_markup)
+        self.context.bot.send_message(self.update.message.chat.id, text=_('Settings'),
+                                      reply_markup=reply_markup)
 
     @bot_menu(name='language', description=_('🌐 Language'))
     @bot_command(name='language', description=_('🌐 Language'))
@@ -66,8 +65,7 @@ class Worker(BaseBotWorker):
             self.user.language_code = language_code
             self.user.save()
             translation.activate(language_code)
-            self.update.message.reply_text(text=_('Language changed to %s') % language_code,
-                                           reply_to_message_id=self.update.message.message_id)
+            self.context.bot.send_message(self.update.message.chat.id, text=_('Language changed to %s') % language_code)
             return self.start()
         languages = list(str(lang[1]) for lang in LANGUAGES)
         kb = [
@@ -75,9 +73,8 @@ class Worker(BaseBotWorker):
             *list(chunks(languages, 3))
         ]
         reply_markup = self.get_keyboard_markup(kb)
-        self.update.message.reply_text(text=_('Language'),
-                                       reply_to_message_id=self.update.message.message_id,
-                                       reply_markup=reply_markup)
+        self.context.bot.send_message(self.update.message.chat.id, text=_('Language'),
+                                      reply_markup=reply_markup)
 
     @bot_menu(name='change_name', description=_('👤 Change name'))
     @send_typing_action
@@ -94,13 +91,11 @@ class Worker(BaseBotWorker):
                 self.user.first_name = first_name
                 self.user.last_name = last_name
                 self.user.save()
-                self.update.message.reply_text(text=_('Name changed to %s') % new_name_str,
-                                               reply_to_message_id=self.update.message.message_id)
+                self.context.bot.send_message(self.update.message.chat.id, text=_('Name changed to %s') % new_name_str)
                 return self.start()
         kb = [
             [_('🔙 Back')],
         ]
         reply_markup = self.get_keyboard_markup(kb)
-        self.update.message.reply_text(text=_('Change name'),
-                                       reply_to_message_id=self.update.message.message_id,
-                                       reply_markup=reply_markup)
+        self.context.bot.send_message(self.update.message.chat.id, text=_('Change name'),
+                                      reply_markup=reply_markup)
