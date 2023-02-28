@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_celery_results',
     'auditlog',
+    'python_telegram_bot_django_persistence',
 
     # microservice apps
     'authentication',

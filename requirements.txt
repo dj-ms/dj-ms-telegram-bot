@@ -37,4 +37,5 @@ sentry-sdk
 
 # Telegram
 python-telegram-bot==13.11  # last sync version
+python-telegram-bot-django-persistence
 

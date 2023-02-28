@@ -3,6 +3,7 @@
 """
 from queue import Queue
 
+from python_telegram_bot_django_persistence.persistence import DjangoPersistence
 from telegram.ext import (
     Dispatcher, MessageHandler, Filters, )
 
@@ -35,4 +36,5 @@ def setup_dispatcher(dp):
 
 
 n_workers = 1 if DEBUG else 4
-dispatcher = setup_dispatcher(Dispatcher(bot, update_queue=Queue(100), workers=n_workers))
+dispatcher = setup_dispatcher(Dispatcher(bot, update_queue=Queue(100),
+                                         workers=n_workers, persistence=DjangoPersistence()))
