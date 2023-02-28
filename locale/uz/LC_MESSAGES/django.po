@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 18:20+0000\n"
+"POT-Creation-Date: 2023-02-28 10:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,63 +27,76 @@ msgid "🚀 Restart"
 msgstr "🚀 Qayta ishga tushirish"
 
 #: app/bot/workers/example_main.py:26
-#, python-format
-msgid "Welcome, %s!"
-msgstr "Hush kelibsiz, %s!"
+msgid "Welcome, <b>%s</b>!"
+msgstr "Hush kelibsiz, <b>%s</b>!"
 
 #: app/bot/workers/example_main.py:28
-#, python-format
-msgid "Welcome back, %s!"
-msgstr "Assalomu alaykum, %s!"
+msgid "Welcome back, <b>%s</b>!"
+msgstr "Assalomu alaykum, <b>%s</b>!"
 
-#: app/bot/workers/example_main.py:29 app/bot/workers/example_main.py:41
-#: app/bot/workers/example_main.py:42
+#: app/bot/workers/example_main.py:29 app/bot/workers/example_main.py:48
+#: app/bot/workers/example_main.py:49
 msgid "⚙️ Settings"
 msgstr "⚙️ Sozlamalar"
 
 #: app/bot/workers/example_main.py:32
-#, python-format
-msgid "Hi there! I am %s."
-msgstr "Hammaga salom! Men %sman."
+msgid "Hi there! I am <b>%s</b>."
+msgstr "Hammaga salom! Men <b>%s</b>man."
 
-#: app/bot/workers/example_main.py:36 app/bot/workers/example_main.py:46
+#: app/bot/workers/example_main.py:36 app/bot/workers/example_main.py:53
 msgid "🏠 Home"
 msgstr "🏠 Bosh sahifa"
 
-#: app/bot/workers/example_main.py:46 app/bot/workers/example_main.py:67
-#: app/bot/workers/example_main.py:88
+#: app/bot/workers/example_main.py:53 app/bot/workers/example_main.py:76
+#: app/bot/workers/example_main.py:100
 msgid "🔙 Back"
 msgstr "🔙 Orqaga"
 
-#: app/bot/workers/example_main.py:47 app/bot/workers/example_main.py:52
-#: app/bot/workers/example_main.py:53
+#: app/bot/workers/example_main.py:54 app/bot/workers/example_main.py:60
+#: app/bot/workers/example_main.py:61
 msgid "🌐 Language"
 msgstr "🌐 Til"
 
-#: app/bot/workers/example_main.py:47 app/bot/workers/example_main.py:71
+#: app/bot/workers/example_main.py:54 app/bot/workers/example_main.py:83
 msgid "👤 Change name"
 msgstr "👤 Ismni o'zgartirish"
 
-#: app/bot/workers/example_main.py:50
-msgid "Settings"
-msgstr "Sozlamalar"
+#: app/bot/workers/example_main.py:57
+msgid ""
+"This is settings menu.\n"
+"Choose what you want to change."
+msgstr "Bu sozlamalar menyusi.\n"
+"O'zgartirish kerak bo'lganini tanlang."
 
-#: app/bot/workers/example_main.py:64
+#: app/bot/workers/example_main.py:73
 #, python-format
-msgid "Language changed to %s"
-msgstr "Til %s ga o'zgartirildi"
+msgid "Language changed to <b>%s</b>."
+msgstr "Til <b>%s</b> ga o'zgartirildi."
 
-#: app/bot/workers/example_main.py:69
-msgid "Language"
-msgstr "Til"
+#: app/bot/workers/example_main.py:79
+msgid ""
+"Choose preferred language from the list below. Your current language is "
+"<b>%s</b>."
+msgstr "Quyidagi ro'yxatdan kerakli tilni tanlang. Joriy tilingiz "
+"<b>%s</b>."
 
-#: app/bot/workers/example_main.py:86
-msgid "Your name changed to %s"
-msgstr "Ismingiz %s ga o'zgartirildi"
+#: app/bot/workers/example_main.py:98
+msgid "Your name changed to <b>%s</b>."
+msgstr "Ismingiz <b>%s</b>ga o'zgartirildi."
 
-#: app/bot/workers/example_main.py:90
-msgid "Change name"
-msgstr "Ismini o'zgartirish"
+#: app/bot/workers/example_main.py:102
+msgid ""
+"Enter your name in one of the following formats:\n"
+" - <b><i>John</i></b>\n"
+" - <b><i>John Smith</i></b>\n"
+" - <b><i>John S. Smith</i></b>\n"
+" - <b><i>John Smith Smith</i></b>"
+msgstr ""
+"Izmingizni quyidagi formatlardan birida kiriting:\n"
+" - <b><i>Aziz</i></b>\n"
+" - <b><i>Aziz Azizov</i></b>\n"
+" - <b><i>Aziz A. Azizov</i></b>\n"
+" - <b><i>Aziz Azizovich Azizov</i></b>"
 
 #: authentication/api/views/auth_views.py:72
 msgid "Passwords does not match"
@@ -129,14 +142,14 @@ msgstr "Token"
 msgid "Tokens"
 msgstr "Tokenlar"
 
-#: core/settings.py:204
+#: core/settings.py:205
 msgid "English"
 msgstr "English"
 
-#: core/settings.py:205
+#: core/settings.py:206
 msgid "Russian"
 msgstr "Русский"
 
-#: core/settings.py:206
+#: core/settings.py:207
 msgid "Uzbek"
 msgstr "O'zbek"

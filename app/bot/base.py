@@ -114,8 +114,9 @@ class BaseBotWorker:
         return telegram.ReplyKeyboardMarkup(kb, resize_keyboard=resize_keyboard,
                                             one_time_keyboard=one_time_keyboard, **kwargs)
 
-    def send_message(self, chat_id, text, reply_markup=None, **kwargs):
-        return self.context.bot.send_message(chat_id=chat_id, text=_(text), reply_markup=reply_markup, **kwargs)
+    def send_message(self, chat_id, text, reply_markup=None, parse_mode='HTML', **kwargs):
+        return self.context.bot.send_message(chat_id=chat_id, text=_(text), reply_markup=reply_markup,
+                                             parse_mode='HTML', **kwargs)
 
     def clear_user_data(self):
         self.context.user_data.clear()

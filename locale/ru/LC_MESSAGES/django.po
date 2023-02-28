@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 18:20+0000\n"
+"POT-Creation-Date: 2023-02-28 10:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,62 +30,80 @@ msgstr "🚀 Перезапуск"
 
 #: app/bot/workers/example_main.py:26
 #, python-format
-msgid "Welcome, %s!"
-msgstr "Добро пожаловать, %s!"
+msgid "Welcome, <b>%s</b>!"
+msgstr "Добро пожаловать, <b>%s</b>!"
 
 #: app/bot/workers/example_main.py:28
 #, python-format
-msgid "Welcome back, %s!"
-msgstr "C возвращением, %s!"
+msgid "Welcome back, <b>%s</b>!"
+msgstr "C возвращением, <b>%s</b>!"
 
-#: app/bot/workers/example_main.py:29 app/bot/workers/example_main.py:41
-#: app/bot/workers/example_main.py:42
+#: app/bot/workers/example_main.py:29 app/bot/workers/example_main.py:48
+#: app/bot/workers/example_main.py:49
 msgid "⚙️ Settings"
 msgstr "⚙️ Настройки"
 
 #: app/bot/workers/example_main.py:32
 #, python-format
-msgid "Hi there! I am %s."
-msgstr "Всем привет! Я %s."
+msgid "Hi there! I am <b>%s</b>."
+msgstr "Всем привет! Я <b>%s</b>."
 
-#: app/bot/workers/example_main.py:36 app/bot/workers/example_main.py:46
+#: app/bot/workers/example_main.py:36 app/bot/workers/example_main.py:53
 msgid "🏠 Home"
 msgstr "🏠 Главная"
 
-#: app/bot/workers/example_main.py:46 app/bot/workers/example_main.py:67
-#: app/bot/workers/example_main.py:88
+#: app/bot/workers/example_main.py:53 app/bot/workers/example_main.py:76
+#: app/bot/workers/example_main.py:100
 msgid "🔙 Back"
 msgstr "🔙 Назад"
 
-#: app/bot/workers/example_main.py:47 app/bot/workers/example_main.py:52
-#: app/bot/workers/example_main.py:53
+#: app/bot/workers/example_main.py:54 app/bot/workers/example_main.py:60
+#: app/bot/workers/example_main.py:61
 msgid "🌐 Language"
 msgstr "🌐 Язык"
 
-#: app/bot/workers/example_main.py:47 app/bot/workers/example_main.py:71
+#: app/bot/workers/example_main.py:54 app/bot/workers/example_main.py:83
 msgid "👤 Change name"
 msgstr "👤 Изменить имя"
 
-#: app/bot/workers/example_main.py:50
-msgid "Settings"
-msgstr "Настройки"
+#: app/bot/workers/example_main.py:57
+msgid ""
+"This is settings menu.\n"
+"Choose what you want to change."
+msgstr ""
+"Это меню настроек.\n"
+"Выберите, что вы хотите изменить."
 
-#: app/bot/workers/example_main.py:64
+#: app/bot/workers/example_main.py:73
 #, python-format
-msgid "Language changed to %s"
-msgstr "Язык изменен на %s"
+msgid "Language changed to <b>%s</b>."
+msgstr "Язык изменен на <b>%s</b>."
 
-#: app/bot/workers/example_main.py:69
-msgid "Language"
-msgstr "Язык"
+#: app/bot/workers/example_main.py:79
+msgid ""
+"Choose preferred language from the list below. Your current language is "
+"<b>%s</b>."
+msgstr ""
+"Выберите предпочитаемый язык из списка ниже. Ваш текущий язык <b>%s</b>."
 
-#: app/bot/workers/example_main.py:86
-msgid "Your name changed to %s"
-msgstr "Имя изменено на %s"
+#: app/bot/workers/example_main.py:98
+#, python-format
+msgid "Your name changed to <b>%s</b>."
+msgstr "Имя изменено на <b>%s</b>."
 
-#: app/bot/workers/example_main.py:90
-msgid "Change name"
-msgstr "Изменить имя"
+#: app/bot/workers/example_main.py:102
+msgid ""
+"Enter your name in one of the following formats:\n"
+" - <b><i>John</i></b>\n"
+" - <b><i>John Smith</i></b>\n"
+" - <b><i>John S. Smith</i></b>\n"
+" - <b><i>John Smith Smith</i></b>"
+msgstr ""
+"Введите ваше имя в одном из следующих форматов:\n"
+" - <b><i>Иван</i></b>\n"
+" - <b><i>Иван Иванов</i></b>\n"
+" - <b><i>Иван И. Иванов</i></b>\n"
+" - <b><i>Иван Иванович Иванов</i></b>"
 
 #: authentication/api/views/auth_views.py:72
 msgid "Passwords does not match"
@@ -131,14 +149,14 @@ msgstr "Токен"
 msgid "Tokens"
 msgstr "Токены"
 
-#: core/settings.py:204
+#: core/settings.py:205
 msgid "English"
 msgstr "English"
 
-#: core/settings.py:205
+#: core/settings.py:206
 msgid "Russian"
 msgstr "Русский"
 
-#: core/settings.py:206
+#: core/settings.py:207
 msgid "Uzbek"
 msgstr "O'zbek"
