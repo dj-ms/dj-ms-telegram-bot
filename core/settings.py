@@ -139,6 +139,8 @@ DATABASE_ROUTERS = [
     'ms_auth_router.routers.DefaultRouter',
 ]
 
+ROUTE_APP_LABELS = ('authentication', )
+
 AUTH_DB = 'default'
 
 DATABASES = {
