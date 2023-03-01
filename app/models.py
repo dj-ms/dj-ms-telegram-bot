@@ -1,11 +1,14 @@
 from __future__ import annotations
+
+from django.contrib.postgres.fields import ArrayField
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 
 from typing import Union, Optional, Tuple
 
 from django.db.models import QuerySet, Manager
-from django.utils import translation
+from django.utils.translation import gettext_lazy as _
 from telegram import Update
 from telegram.ext import CallbackContext
 
@@ -54,8 +57,6 @@ class User(CreateUpdateTracker):
     deep_link = models.CharField(max_length=64, **nb)
 
     is_blocked_bot = models.BooleanField(default=False)
-
-    is_admin = models.BooleanField(default=False)
 
     objects = GetOrNoneManager()  # user = User.objects.get_or_none(user_id=<some_id>)
     admins = AdminUserManager()  # User.admins.all()
@@ -111,3 +112,31 @@ class User(CreateUpdateTracker):
         if self.username:
             return f'@{self.username}'
         return f"{self.first_name} {self.last_name}" if self.last_name else f"{self.first_name}"
+
+
+class BroadcastMessage(CreateUpdateTracker):
+    status_choices = (
+        ('pending', _('Pending')),
+        ('in_progress', _('In progress')),
+        ('stopped', _('Stopped')),
+        ('finished', _('Finished')),
+        ('failed', _('Failed')),
+    )
+    text = models.TextField(validators=[MinLengthValidator(1), MaxLengthValidator(4096)])
+    images = ArrayField(models.PositiveBigIntegerField(), default=[], blank=True)
+    start_datetime = models.DateTimeField(**nb)
+
+    languages = ArrayField(
+        models.CharField(max_length=2, choices=LANGUAGES), default=list(i[0] for i in LANGUAGES)
+    )
+
+    status = models.CharField(max_length=16, choices=status_choices, default='pending')
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = _('Broadcast message')
+        verbose_name_plural = _('Broadcast messages')
+
+    def __str__(self):
+        return f'{self.text[:20]}...'
